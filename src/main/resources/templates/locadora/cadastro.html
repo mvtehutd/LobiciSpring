@@ -85,6 +85,15 @@
 							<span th:errors="*{password}"></span>
 						</div>
 					</div>
+
+					<div th:unless="${locadora.id == null}" class="form-group col-md-6">
+						<label th:text="#{locadora.password.label}" for="password"></label> 
+						<input type="password" class="form-control" name="novoPassword"
+							th:placeholder="#{locadora.password.label}" autofocus="autofocus"
+							th:classappend="${#fields.hasErrors('password')} ? is-invalid" />
+							
+						<input type="hidden" th:field="*{password}" />
+					</div>
 				</div>
 
 				<input type="hidden" id="id" th:field="*{id}" />
