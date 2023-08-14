@@ -14,9 +14,9 @@ clonar o repositório
 
     git clone https://github.com/mvtehutd/LobiciSpring.git
 
- e subir o mysql via docker
+ verificar os dados de conexão com o banco de dados em "application.properties" e rodar com o comando
 
-     sudo docker run -p 3306:3306 --name mysql1 -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0.27
+     mvn spring-boot:run
 
 ## Nome do banco e da Tabelas
       Nome do Banco: Locadora
