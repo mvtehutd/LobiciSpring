@@ -14,7 +14,7 @@
 						<span th:text="#{locadora.listar.label}"></span>
 					</li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/locadoras/cadastrar}" role="button"> 
+				<a sec:authorize="isAuthenticated()&&hasRole('ROLE_ADMIN')" class="btn btn-primary btn-md" th:href="@{/locadoras/cadastrar}" role="button"> 
 					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
 					<span th:text="#{locadora.cadastrar.label}"></span>
 				</a>
