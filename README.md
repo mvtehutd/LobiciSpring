@@ -6,13 +6,13 @@ Lobici Implementation with SpringMVC Framework
 
 Para começar o desenvolvimento, clone este repositório para sua máquina local via `git`
 
-    git clone https://github.com/boasgsv/LobiciSpring.git
+    git clone https://github.com/mvtehutd/LobiciSpring.git
 
 ## Roteiro de Execução
 
 clonar o repositório
 
-    git clone https://github.com/boasgsv/LobiciSpring.git
+    git clone https://github.com/mvtehutd/LobiciSpring.git
 
  e subir o mysql via docker
 
