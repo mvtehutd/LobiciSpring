@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><i class="oi oi-caret-right"></i>
+						<span th:text="#{locadora.cadastrar.label}"></span></li>
+				</ul>
+				<a class="btn btn-primary btn-md" th:href="@{/locadoras/listar}"
+					role="button"> <span class="oi oi-spreadsheet" title="Listar"
+					aria-hidden="true"></span> <span th:text="#{locadora.listar.label}"></span>
+				</a>
+			</div>
+		</nav>
+
+		<div class="container" id="cadastro">
+
+			<div th:replace="fragments/alert"></div>
+
+			<form
+				th:action="${locadora.id == null} ? @{/locadoras/salvar} : @{/locadoras/editar}"
+				th:object="${locadora}" method="POST">
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label th:text="#{locadora.nome.label}" for="nome"></label> 
+						<input type="text" class="form-control" id="name" autofocus="autofocus"
+							th:field="*{name}" th:placeholder="#{locadora.nome.label}"
+							th:classappend="${#fields.hasErrors('name')} ? is-invalid" />
+
+						<div class="invalid-feedback">
+							<span th:errors="*{name}"></span>
+						</div>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label th:text="#{locadora.cidade.label}" for="cidade"></label> 
+						<input type="text" class="form-control" id="cidade" autofocus="autofocus"
+							th:field="*{cidade}" th:placeholder="#{locadora.cidade.label}"
+							th:classappend="${#fields.hasErrors('cidade')} ? is-invalid" />
+
+						<div class="invalid-feedback">
+							<span th:errors="*{cidade}"></span>
+						</div>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label th:text="#{locadora.cnpj.label}" for="CNPJ"></label> 
+						<input type="text" class="form-control" id="CNPJ" autofocus="autofocus"
+							th:field="*{CNPJ}" placeholder="__.___.___/____-__"
+							th:readonly="${locadora.id != null}"
+							data-mask="00.000.000/0000-00" data-mask-reverse="true"
+							th:classappend="${#fields.hasErrors('CNPJ')} ? is-invalid" />
+							
+						<div class="invalid-feedback">
+							<span th:errors="*{CNPJ}"></span>
+						</div>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label th:text="#{locadora.email.label}" for="email"></label> 
+						<input type="email" class="form-control" id="email" placeholder="Email"
+							autofocus="autofocus" th:field="*{email}"
+							th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
+						
+						<div class="invalid-feedback">
+							<span th:errors="*{email}"></span>
+						</div>
+					</div>
+
+					<div th:if="${locadora.id == null}" class="form-group col-md-6">
+						<label th:text="#{locadora.password.label}" for="password"></label> 
+						<input type="password" class="form-control" id="password"
+							th:placeholder="#{locadora.password.label}" autofocus="autofocus"
+							th:field="*{password}"
+							th:classappend="${#fields.hasErrors('password')} ? is-invalid" />
+							
+						<div class="invalid-feedback">
+							<span th:errors="*{password}"></span>
+						</div>
+					</div>
+				</div>
+
+				<input type="hidden" id="id" th:field="*{id}" />
+				<button type="submit" th:text="#{button.salvar.label}"
+					class="btn btn-primary btn-sm"></button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

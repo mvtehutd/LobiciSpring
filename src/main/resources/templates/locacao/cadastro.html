@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+</head>
+<body>
+	<section class="layout-content" layout:fragment="corpo">
+
+		<nav class="navbar navbar-expand-md bg-light">
+			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><i class="oi oi-caret-right"></i>
+						<span th:text="#{locacao.cadastrar.label}"></span></li>
+				</ul>
+				<a class="btn btn-primary btn-md" th:href="@{/locacoes/listar}"
+					role="button"> <span class="oi oi-spreadsheet" title="Listar"
+					aria-hidden="true"></span> <span th:text="#{locacao.listar.label}"></span>
+				</a>
+			</div>
+		</nav>
+
+		<div class="container" id="cadastro">
+
+			<div th:replace="fragments/alert"></div>
+
+			<form th:action="@{/locacoes/salvar}" th:object="${locacao}"
+				method="POST">
+
+				<div th:replace="fragments/validacao :: validacao"></div>
+
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						
+						<div class="form-group col-md-6">
+							<label th:text="#{locacao.locadora.label}" for="locadora"></label> 
+							<select id="locadora" class="form-control" th:field="*{locadora}"
+								th:classappend="${#fields.hasErrors('locadora')} ? is-invalid">
+								<th th:each="locadora : ${locadoras}">
+									<option type="radio" th:id="${locadora.id}" name="locadora" th:value="${locadora.id}" th:text="${locadora.name}" required>
+								</th>
+							</select>
+							<div class="invalid-feedback">
+								<span th:errors="*{locadora}"></span>
+							</div>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label th:text="#{locacao.data.label}" for="data"></label> 
+							<input type="date" class="form-control" id="data" autofocus="autofocus"
+								th:field="*{data}" th:placeholder="#{locacao.data.label}"
+								th:classappend="${#fields.hasErrors('data')} ? is-invalid"/>
+	
+							<div class="invalid-feedback">
+								<span th:errors="*{data}"></span>
+							</div>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label th:text="#{locacao.hora.label}" for="hora"></label> 
+							<select class="form-control" name="hora"
+								th:classappend="${#fields.hasErrors('locadora')} ? is-invalid">
+								<th th:each="i: ${#numbers.sequence(0, 23)}">
+									<option type="radio" name="hora" th:value="${i}" th:text="${i}" required>
+								</th>
+							</select>
+						</div>
+					</div>
+				</div>
+				
+				<input type="hidden" th:field="*{cliente}" id="cliente">
+				<button type="submit" th:text="#{button.salvar.label}"
+					class="btn btn-primary btn-sm"></button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>
