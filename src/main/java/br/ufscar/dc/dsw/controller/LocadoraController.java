@@ -88,10 +88,15 @@ public class LocadoraController {
 			return "locadora/cadastro";
 		}
 		Usuario user = usuarioDAO.getByEmail(locadora.getEmail());
-		service.salvar(locadora);
-		if (user != null && user.getId() != locadora.getId()){
+		if (user != null){
             model.addAttribute("error", "locadora.error.duplicado.label");
             model.addAttribute("message", "locadora.error.email.duplicado.label");
+            return "error";
+        }
+		Locadora locadora1 = locadoraDAO.findByCNPJ(locadora.getCNPJ());
+        if (locadora1 != null){
+            model.addAttribute("error", "locadora.error.duplicado.label");
+            model.addAttribute("message", "locadora.error.cnpj.duplicado.label");
             return "error";
         }
 		System.out.println("password banco = " + locadora.getPassword());
