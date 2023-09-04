@@ -17,6 +17,8 @@ public interface ILocacaoService {
 	List<Locacao> buscarTodosPorCliente(Cliente c);
 
 	List<Locacao> buscarTodosPorLocadora(Locadora l);
+
+	List<Locacao> buscarTodos();
 	
 	void salvar(Locacao locadora);
 }

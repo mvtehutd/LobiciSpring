@@ -72,7 +72,7 @@ public class Cliente extends Usuario {
         this.dataNascimento = dataNascimento;
     }
 
-    public List<Locacao> getLocacoes() {
+    public List<Locacao> listarLocacoes() {
         return locacoes;
     }
 	

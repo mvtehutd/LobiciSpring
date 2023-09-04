@@ -14,7 +14,7 @@
 						<span th:text="#{locacao.listar.label}"></span>
 					</li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/locacoes/cadastrar}" role="button"> 
+				<a sec:authorize="isAuthenticated()&&hasRole('ROLE_CLIENTE')" class="btn btn-primary btn-md" th:href="@{/locacoes/cadastrar}" role="button"> 
 					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
 					<span th:text="#{locacao.cadastrar.label}"></span>
 				</a>

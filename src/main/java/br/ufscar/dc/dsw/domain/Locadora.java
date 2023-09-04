@@ -39,7 +39,7 @@ public class Locadora extends Usuario {
 		this.CNPJ = CNPJ;
 	}
 
-    public List<Locacao> getLocacoes() {
+    public List<Locacao> listarLocacoes() {
         return locacoes;
     }
 

@@ -88,13 +88,13 @@ public class LocadoraController {
 			return "locadora/cadastro";
 		}
 		Usuario user = usuarioDAO.getByEmail(locadora.getEmail());
-		if (user != null){
+		if (user != null && user.getId() != user.getId()){
             model.addAttribute("error", "locadora.error.duplicado.label");
             model.addAttribute("message", "locadora.error.email.duplicado.label");
             return "error";
         }
 		Locadora locadora1 = locadoraDAO.findByCNPJ(locadora.getCNPJ());
-        if (locadora1 != null){
+        if (locadora1 != null && locadora1.getId() != locadora1.getId()){
             model.addAttribute("error", "locadora.error.duplicado.label");
             model.addAttribute("message", "locadora.error.cnpj.duplicado.label");
             return "error";
