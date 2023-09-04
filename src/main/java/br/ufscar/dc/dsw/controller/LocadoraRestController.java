@@ -53,9 +53,7 @@ public class LocadoraRestController {
 		locadora.setCNPJ((String) json.get("cnpj"));
         locadora.setEmail((String) json.get("email"));
         locadora.setCidade((String) json.get("cidade"));
-        locadora.setRole((String) json.get("role"));
         locadora.setPassword((String) json.get("password"));
-        locadora.setEnabled((Boolean) json.get("enabled"));
 	}
 
 	@GetMapping(path = "/locadoras")
@@ -130,8 +128,12 @@ public class LocadoraRestController {
 		if (locadora == null) {
 			return ResponseEntity.notFound().build();
 		} else {
-			service.excluir(id);
-			return ResponseEntity.noContent().build();
+			if (service.locadoraTemLocacoes(id)) {
+				return new ResponseEntity<Boolean>(false, HttpStatus.FORBIDDEN);
+			} else{
+				service.excluir(id);
+				return ResponseEntity.noContent().build();
+			}
 		}
 	}
 }

@@ -50,10 +50,8 @@ public class ClienteRestController {
         cliente.setEmail((String) json.get("email"));
         cliente.setDataNascimento((String) json.get("dataNascimento"));
         cliente.setSexo((String) json.get("sexo"));
-        cliente.setRole((String) json.get("role"));
         cliente.setPassword((String) json.get("password"));
         cliente.setTelefone((String) json.get("telefone"));
-        cliente.setEnabled((Boolean) json.get("enabled"));
 	}
 
 	@GetMapping(path = "/clientes")
@@ -119,8 +117,12 @@ public class ClienteRestController {
 		if (cliente == null) {
 			return ResponseEntity.notFound().build();
 		} else {
-			service.excluir(id);
-			return ResponseEntity.noContent().build();
+			if (service.clienteTemLocacoes(id)) {
+				return new ResponseEntity<Boolean>(false, HttpStatus.FORBIDDEN);
+			} else{
+				service.excluir(id);
+				return ResponseEntity.noContent().build();
+			}
 		}
 	}
 }
